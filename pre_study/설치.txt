@@ -1,0 +1,68 @@
+I. 파이썬 설치
+
+1. 파이썬 다운로드
+https://www.python.org/
+python-manager-26.3.msix  다운로드
+
+2. 파이썬 설치
+python-manager-26.3.msix  실행
+
+
+3. 버전확인 
+   python --version
+  Python 3.13.13
+
+4. 명령어 실행
+    python
+   >>>  로 프롬프트 변경
+   >>> 5+3
+   8
+   >>> print('안녕? 파이썬?')
+    안녕? 파이썬?
+
+5. 파일 확장자
+     윈도우 탐색기 > 옵션 > 보기탭
+      -  숨김파일, 폴더 및 드라이브 표시 : 체크
+      -  알려진 파일 형식의 파일 확장명 숨기기 : 체크해제
+
+6. 파일생성
+    이름폴더 > day_01>fist.py
+    print(1234)
+
+7. 폴더 위치에서 실행
+   shift + 터미널에서 열기
+   pre_study\day_01> python first.py
+  1234
+
+
+8. second.py
+     안녕하세요 MBC입니다
+
+
+II. VSCode 설치
+1. 다운로드
+https://code.visualstudio.com/
+VSCodeUserSetup-x64-1.136.1.exe
+
+2. 설치
+VSCodeUserSetup-x64-1.136.1.exe
+
+3. 확장 기능 설치
+   우측 extensions > python 검색
+    python , python extension pack 설치
+    설치 후 vscode 재시작
+
+
+4. ctrl+shift+p
+   python 검색
+     python : Select Interpeter
+   가상환경이 없을 경우
+    +Create Virtural Environment  로 가상환경 생성
+     Quick Create venv 로 설치시 쉽게 설치 가능
+    가상환경이 있을 경우
+   .venv 선택
+
+5. first.py파일 선택 및 실행
+
+
+
