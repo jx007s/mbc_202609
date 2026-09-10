@@ -158,6 +158,23 @@ a **= 2
 print(a)
 a %= 7
 print(a)
+
+print("5 3항 연산자 =====")
+a = False
+## 조건 : Bool
+print("참이지롱" if a else "거짓부렁")
+    # True일때값   조건     False일때값
+
+jum = 68
+rr = "합격" if jum >= 80 else "불합격"
+print(jum, rr)
+
+rr =    "우수" if jum >= 80 else \
+        "양호" if jum >= 60 else \
+        "정상" if jum >= 40 else \
+        "미달"
+print(jum, rr)
+
 '''
 연산자우선순위
 ()
@@ -169,4 +186,11 @@ and or not
 02_exam.py 를 생성하고
 이름 , 국어, 영어, 수학 을 입력하고
 총점, 평균을 계산하여 출력하세요
+
+등급 
+수  90 이상
+우  80 이상
+미  70 이상
+양  60 이상
+가  60 미만
 '''
