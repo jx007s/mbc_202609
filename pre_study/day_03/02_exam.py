@@ -30,3 +30,17 @@ grade =     "수" if avg >= 90 else \
 
 print("등급 : ", grade)
 
+if avg >= 90:
+    grade2 = "수"
+elif avg >= 80:
+    grade2 = "우"
+    if kor >= 80 and eng >= 80 and mat >= 80:
+        grade2 += "(균등)"
+elif avg >= 70:
+    grade2 = "미"
+elif avg >= 60:
+    grade2 = "양"
+else:
+    grade2 = "가"
+
+print("등급2 : ", grade2)
