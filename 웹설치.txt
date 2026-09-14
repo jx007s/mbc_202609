@@ -39,13 +39,117 @@ public class Test {
 
       System.out.println("hello world");
    }
-
 }
+
+2) class 생성
+탐색기에서 shfit + 마우스 오른쪽  : 터미널 열기
+javac Test.java
+Test.class 생성
+
+
+3) 실행
+
+java Test
+hello world
+
+                   컴파일                                                         실행
+                   javac                                     java
+Test.java -----------------> Test.class --------------------------> 실행
 
 
 II. 이클립스 설치
 1. 다운로드
 https://www.eclipse.org/downloads/packages/
-Eclipse IDE for Enterprise Java and Web Developers  (592 MB)
+Eclipse IDE for Enterprise Java and Web Developers  (585 MB)
 Windows - x86_64
 eclipse-committers-2026-09-R-win32-x86_64.zip
+
+
+
+2. 압축해제
+eclipse.exe 바로만들기 생성 및 바탕화면에 아이콘 복사 
+
+
+3. 이클립스 실행
+c:\이름폴더\java_work  로 실행
+프로젝트 생성 : javaPrj
+패키지생성 : basic_p
+클래스생성 : FirstMain
+
+package basic_p;
+
+public class FirstMain {
+
+	public static void main(String[] args) {
+		System.out.println("안녕? 난 FirstMain 이야");
+
+	}
+
+}
+
+
+III. tomcat 
+1. tomcat 다운로드
+https://tomcat.apache.org/
+Windows zip (pgp, sha512) : apache-tomcat-11.0.25-windows-x64.zip
+압축해제
+
+2. 시스템변수 설정 
+c:\이름폴더\
+
+
+내컴퓨터-속성-고급-환경변수-시스템변수
+
+새로만들기 : 
+
+변수이름  : CATALINA_HOME   
+변수값  :  tomcat 설치폴더     ===> C:\이름폴더\apache-tomcat-11.0.25
+
+
+
+편집:
+
+변수이름  : path 
+새로만들기 : %CATALINA_HOME%\bin
+
+
+3. 서버실행
+C:\이름폴더\apache-tomcat-11.0.25\bin\startup.bat 더블클릭
+실행 유무 , 엑세스 허용
+브라우저에서 http://localhost:8080/ 진입
+
+4. C:\이름폴더\apache-tomcat-11.0.25\webapps\aaa.html
+<html>
+<head>
+</head>
+<body>
+	<h1>강사서버 aaa 이지롱</h1>
+</body>
+</html>
+
+http://192.168.100.148:8080/aaa.html  에서 확인
+
+
+IV. 이클립스에서 tomcat 프로젝트 실행
+1. 프로젝트 생성
+파일 > new > web > Dynamic Web Project
+
+
+프로젝트명 : jspPrj
+runtime : Apache Tomcat v11.0
+
+
+2. src/main/webapp/aaa.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>강사 jspPrj aaa 이지롱</h1>
+</body>
+</html>
+
