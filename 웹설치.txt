@@ -1,0 +1,51 @@
+
+I. JAVA 설치
+1. java 다운로드
+https://www.oracle.com/kr/
+버전 : LTS JDK 21 - 
+windows : 
+x64 Compressed Archive	187.82 MB	
+https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.zip (sha256)
+
+
+2.  압축해제
+특정폴더\jdk-21.0.12.1
+
+3. 환경변수 등록
+윈도우탐색기 > 내컴퓨터(마우스오른쪽) > 속성 > 고급시스템설정 > 고급탭 > 환경변수
+시스템변수
+1)새로만들기
+변수이름 : JAVA_HOME
+변수값 : 특정폴더\jdk-21.0.12.1  
+2) path 편집
+  새로만들기 :   %JAVA_HOME%\bin
+
+3. 확인
+터미널 (cmd)
+java -version
+java version "21.0.12.1" 2026-08-18 LTS
+Java(TM) SE Runtime Environment (build 21.0.12.1+1-LTS-4)
+Java HotSpot(TM) 64-Bit Server VM (build 21.0.12.1+1-LTS-4, mixed mode, sharing)
+
+
+4. java 파일 실행
+
+1) 메모장으로 파일생성
+
+c:\이름폴더\java_work\Test.java
+
+public class Test {
+  public static void main(String[] args){
+
+      System.out.println("hello world");
+   }
+
+}
+
+
+II. 이클립스 설치
+1. 다운로드
+https://www.eclipse.org/downloads/packages/
+Eclipse IDE for Enterprise Java and Web Developers  (592 MB)
+Windows - x86_64
+eclipse-committers-2026-09-R-win32-x86_64.zip
