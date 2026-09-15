@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_arr</title>
+</head>
+<body>
+    <h1>02_arr</h1>
+    <script>
+        /*
+        fetch('http://localhost:8080/jspPrj/back_07/02_stud.jsp')
+        .then(async rr =>{
+            const data = await rr.text()
+            console.log("정상실행", data)
+        })
+        .catch(e=>{
+            console.log("에러발생")
+        })
+        */
+
+        fetch('http://localhost:8080/jspPrj/back_07/02_stud.jsp')
+        .then(rr =>rr.text())       //Promise 형태인 text()를 실행하여 return 으로 넘김
+        .then(data =>{      // text() : 현재 data는 문자열
+            console.log("정상실행", data) 
+            console.log("data[2]", data[2])
+        })
+        .catch(e=>{
+            console.log("에러발생")
+        })
+
+        
+        fetch('http://localhost:8080/jspPrj/back_07/02_stud.jsp')
+        .then(rr =>rr.json())       // 비동기로 받은 내용을 배열, 객체로 변환
+        .then(data =>{      // text() : 현재 data는 문자열
+            console.log("json", data) 
+            console.log("data[2]", data[2])
+        })
+        .catch(e=>{
+            console.log("에러발생")
+        })
+    </script>
+</body>
+</html>
