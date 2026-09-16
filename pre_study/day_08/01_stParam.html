@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_stParam</title>
+    <style>
+        #boxs{
+            width: 300px;
+            height: 50px;
+            border: 1px solid #ccc;
+            padding:20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>01_stParam</h1>
+    pid: <input type="text" id="pBox">
+    <input type="button" onclick="backGo()" value="전송">
+    <div id="boxs"></div>
+    <script>
+
+        // 엘리먼트 가져오기
+        var boxs = document.querySelector("#boxs")
+        var pBox = document.querySelector("#pBox")
+        //boxs.innerHTML="아기상어"
+
+        function backGo(){
+            //console.log(pBox.value) // input의 value 출력
+            //var pid = 'ccc'
+            var pid = pBox.value
+
+            fetch('http://localhost:8080/jspPrj/back_08/01_st.jsp',
+                    //1. URL
+            // 2. 옵션 : 연관배열로 설정
+            {
+                method : "POST",
+                headers:{
+                    'Content-type' : 'application/x-www-form-urlencoded',
+                    
+                },
+                body: `pid=${pid}&age=56`
+            }
+            )
+            .then(rr=>rr.text())
+            .then(data=>{
+                //console.log("정상:",data.trim())
+
+                let ttt = data.trim()
+                if(ttt == 'null'){
+                    ttt = "잘못된 데이터입니다."
+                }
+                boxs.innerHTML=`받은정보 : ${ttt}`
+            })
+            .catch(e=>console.log("에러"))
+        }
+    </script>
+</body>
+</html>
