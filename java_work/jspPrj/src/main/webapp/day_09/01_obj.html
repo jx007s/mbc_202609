@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>01_obj</title>
+</head>
+<body>
+<h1>01_obj</h1>
+<ul>
+	<li>이름:<span id="pname"/></li>
+	<li>나이:<span id="age"/></li>
+	<li>결혼:<span id="marriage"/></li>
+</ul>
+<select id="stId">
+	<option>aaa</option>
+	<option>bbb</option>
+	<option>ccc</option>
+	<option>ddd</option>
+	<option>eee</option>
+</select>
+<input type="button" value="회원정보" onclick="stGo()">
+</body>
+</html>
+<script>
+	//DOM 요소 가져오기
+	let pname = document.querySelector("#pname")
+	let age = document.querySelector("#age")
+	let marriage = document.querySelector("#marriage")
+	let stId = document.querySelector("#stId")
+	
+	function stGo(){
+		//alert(stId.value) //id 확인
+		
+		fetch("/jspPrj/back_09/01_stOne.jsp",{
+			method:"POST",
+			headers:{
+                'Content-type' : 'application/x-www-form-urlencoded',  
+            },
+			body: `stId=${stId.value}`
+		})
+		.then(rr=>rr.json())
+		//.then(data=>console.log(data))
+		.then(data=>{
+			// 비동기로 가져온 json 데이터를 dom 에 입력
+			pname.innerHTML=data.pname		
+			age.innerHTML=data.age		
+			marriage.innerHTML=data.marriage		
+		})
+		.catch(e=>console.log("에러:"))
+	}
+	
+	/*
+	메뉴(비빕밥,짜장면,돈가스) 선택 -> 전송
+	
+	종류:한식, 중식,  양식
+	가격:8000,7500, 12000
+	배달:가능, 가능,  불가
+	*/
+	
+</script>
