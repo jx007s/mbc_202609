@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>02_preMenu</title>
+</head>
+<body>
+<h1>02_preMenu</h1>
+<ul>
+	<li>종류:<span id="kind"/></li>
+	<li>이름:<span id="pname"/></li>
+	<li>가격:<span id="price"/></li>
+	<li>배달:<span id="delivery"/></li>
+</ul>
+<select id="menuNo"></select>
+
+<input type="button" value="주문" onclick="menuGo()">
+</body>
+</html>
+<script>
+	//DOM 요소 가져오기
+	let pname = document.querySelector("#pname")
+	let kind = document.querySelector("#kind")
+	let price = document.querySelector("#price")
+	let delivery = document.querySelector("#delivery")
+	let menuNo = document.querySelector("#menuNo")
+	
+	function menuGo(){
+		
+		//console.log(menuNo.value)
+		fetch("/jspPrj/back_10/02_preMenu.jsp",{
+			method:"POST",
+			headers:{
+                'Content-type' : 'application/x-www-form-urlencoded',  
+            },
+            body: `service=sch&menuNo=${menuNo.value}`
+		})
+		.then(rr=>rr.json())
+		//.then(data=>console.log(data))
+		.then(data=>{
+			// 비동기로 가져온 json 데이터를 dom 에 입력
+			pname.innerHTML=data.pname		
+			kind.innerHTML=data.kind		
+			price.innerHTML=data.price		
+			delivery.innerHTML=data.delivery		
+		})
+		.catch(e=>console.log("에러:",e.message))
+	}
+	
+	function preGo(){
+		fetch("/jspPrj/back_10/02_preMenu.jsp",{
+			method:"POST",
+			headers:{
+                'Content-type' : 'application/x-www-form-urlencoded',  
+            },
+            body: `service=pre`
+		})
+		.then(rr=>rr.json())
+		.then(data=>{  
+			// data : 백앤드에서 받은 메뉴 배열
+			//console.log(data)
+			selectInit(data)
+		})
+		.catch(e=>console.log("에러:",e.message))
+	}
+	
+	
+	
+	// 매개변수 ddd 배열
+	function selectInit(ddd){
+		for(i in ddd){
+			// i 원소번호
+			// menuNo의 하위에 추가
+			menuNo.appendChild(new Option(ddd[i],i))
+		}
+		//menuNo.appendChild(new Option("비빔밥",0))
+		//menuNo.appendChild(new Option("자장면",1))
+		//menuNo.appendChild(new Option("초밥",2))
+		//menuNo.appendChild(new Option("돼지국밥",3))
+		//menuNo.appendChild(new Option("떡볶이",4))
+	}
+	
+	preGo()	//최초 로드시 자동실행
+	
+</script>

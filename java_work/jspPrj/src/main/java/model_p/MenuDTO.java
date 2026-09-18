@@ -5,6 +5,12 @@ public class MenuDTO {
 	String kind, pname;
 	int price;
 	boolean delivery;
+	
+	
+	//켭슐화
+	public String getPname() {
+		return pname;
+	}
 	public MenuDTO(String kind, String pname, int price, boolean delivery) {
 		
 		this.kind = kind;
