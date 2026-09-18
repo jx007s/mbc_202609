@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>01_menu</title>
+</head>
+<body>
+<h1>01_menu</h1>
+<ul>
+	<li>종류:<span id="kind"/></li>
+	<li>이름:<span id="pname"/></li>
+	<li>가격:<span id="price"/></li>
+	<li>배달:<span id="delivery"/></li>
+</ul>
+<select id="menuNo">
+	<option value="0">비빔밥</option>
+	<option value="1">자장면</option>
+	<option value="2">초밥</option>
+	<option value="3">돼지국밥</option>
+	<option value="4">떡볶이</option>
+	
+</select>
+<input type="button" value="주문" onclick="menuGo()">
+</body>
+</html>
+<script>
+	//DOM 요소 가져오기
+	let pname = document.querySelector("#pname")
+	let kind = document.querySelector("#kind")
+	let price = document.querySelector("#price")
+	let delivery = document.querySelector("#delivery")
+	let menuNo = document.querySelector("#menuNo")
+	
+	function menuGo(){
+		
+		console.log(menuNo.value)
+		fetch("/jspPrj/back_10/01_menuOne.jsp",{
+			method:"POST",
+			headers:{
+                'Content-type' : 'application/x-www-form-urlencoded',  
+            },
+            body: `menuNo=${menuNo.value}`
+		})
+		.then(rr=>rr.json())
+		//.then(data=>console.log(data))
+		.then(data=>{
+			// 비동기로 가져온 json 데이터를 dom 에 입력
+			pname.innerHTML=data.pname		
+			kind.innerHTML=data.kind		
+			price.innerHTML=data.price		
+			delivery.innerHTML=data.delivery		
+		})
+		.catch(e=>console.log("에러:",e.message))
+	}
+	
+	/*
+	메뉴(비빕밥,짜장면,돈가스) 선택 -> 전송
+	
+	종류:한식, 중식,  양식
+	가격:8000,7500, 12000
+	배달:가능, 가능,  불가
+	*/
+	
+</script>
