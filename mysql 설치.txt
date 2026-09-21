@@ -1,8 +1,12 @@
 I. mysql 설치
-
+1. 다운로드
+   https://www.mysql.com/downloads/
+   MySQL Community (GPL) Downloads »  MySQL Installer for Windows  
+   mysql-installer-community-8.0.46.0.msi 다운로드
+    
+2. 설치
    Full 로 설치
-
-
+   root 암호 : 1234
 
 
 II. 계정/DB 설정
@@ -30,3 +34,29 @@ II. 계정/DB 설정
    pw : 1234
    schema : mbc_db
 
+
+
+III. java DB 드라이버 설정
+1. jar 다운로드
+   https://www.mysql.com/downloads/
+  Connector/J
+	Select Version: 26.7.0
+
+	Select Operating System: Platform Independent
+	Platform Independent (Architecture Independent), ZIP 다운로드 
+	(mysql-connector-j-26.7.0.zip)	
+
+
+2. 압축해제
+   mysql-connector-j-26.7.0.zip 압축해제
+   
+3. 프로젝트 라이브러리 복사
+    javaPrj  > 새로만들기 > 폴더  : lib
+    lib 폴더에    mysql-connector-j-26.7.0.jar 붙여넣기
+
+4. 프로젝트 라이브러리 등록
+   javaPrj 마우스 오른쪽 > Build path > configure build path ...
+  Libraries 탭 > Add JARS
+     lib  > mysql-connector-j-26.7.0.jar 선택
+    
+  
