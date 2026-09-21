@@ -1,0 +1,32 @@
+I. mysql 설치
+
+   Full 로 설치
+
+
+
+
+II. 계정/DB 설정
+1. mysql workbench 실행 및 접속
+   root / 1234
+
+2. db생성
+    create new schema 로 생성
+    mbc_db / utf-8 / utf-8 general ci
+
+3. 계정생성
+    administration -> USers and Privileges
+   login
+      mbc_user
+      caching_sha2_password
+      localhost
+      1234
+   Schema Privileges
+      add Entry > selected schema : mbc_db
+      select ALL
+
+4. MySQL Connettions + 하여 생성
+   name : mbc
+     user : mbc_user
+   pw : 1234
+   schema : mbc_db
+

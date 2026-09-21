@@ -153,3 +153,15 @@ runtime : Apache Tomcat v11.0
 </body>
 </html>
 
+
+3. 실행
+jspPrj 프로젝트명 > 마우스오른쪽 > Run As > Run on Server
+ Apache > Tomcat v11.0 Server
+
+확인 : http://192.168.100.146:8080/jspPrj/aaa.jsp
+
+
+
+V. postman
+https://www.postman.com/
+
