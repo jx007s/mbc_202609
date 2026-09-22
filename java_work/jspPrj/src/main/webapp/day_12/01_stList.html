@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>01_stList</title>
+</head>
+<body>
+<h1>01_stList</h1>
+<table border="" id="tbl">
+	<tr>
+		<td>아이디</td>
+		<td>이름</td>
+		<td>나이</td>
+		<td>결혼</td>
+	</tr>
+</table>
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+let tbl = document.querySelector("#tbl")
+function preInit(){
+	fetch("/jspPrj/back_12/stud.jsp",{
+		method:"POST",
+		headers:{
+            'Content-type' : 'application/x-www-form-urlencoded',  
+        },
+        body: `service=list`
+	})
+	.then(rr=>rr.json())
+	.then(data=>{  
+		// data : 백앤드에서 받은 메뉴 배열
+		//console.log(data)
+		for (let st of data) {
+			console.log(st)
+			let tr = document.createElement("tr")
+			tr.innerHTML = `
+				<td>${st.pid}</td>
+				<td onclick="detailGo('${st.pid}')">${st.pname}</td>
+				<td>${st.age}</td>
+				<td>${st.marriage ? "기혼":"미혼"}</td>
+			`
+			tbl.appendChild(tr)	
+		}
+		
+		
+	})
+	.catch(e=>console.log("에러:",e.message))
+}
+
+function detailGo(pid){
+	
+	fetch("/jspPrj/back_12/stud.jsp",{
+		method:"POST",
+		headers:{
+            'Content-type' : 'application/x-www-form-urlencoded',  
+        },
+        body: `service=detail&pid=${pid}`
+	})
+	.then(rr=>rr.json())
+	.then(data=>{  
+		console.log(data)
+	})
+	.catch(e=>console.log("에러:",e.message))
+}
+
+
+
+
+preInit()
+</script>
