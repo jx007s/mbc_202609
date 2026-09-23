@@ -5,23 +5,130 @@
 <title>01_stList</title>
 </head>
 <body>
-<h1>01_stList</h1>
-<table border="" id="tbl">
-	<tr>
-		<td>아이디</td>
-		<td>이름</td>
-		<td>나이</td>
-		<td>결혼</td>
-	</tr>
-</table>
-
-
+	<h1>학생정보</h1>
+	<div id="listBox">
+		<h2>학생목록</h2>
+		<table border="" id="tbl"></table>
+		<input type="button" value="학생등록" onclick="insertForm()">
+	</div>
+	<div id="detailBox">
+		<h2>상세보기</h2>
+		<table border="">
+			<tr>
+				<td>아이디</td>
+				<td id="pid"></td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td id="pname"></td>
+			</tr>
+			<tr>
+				<td>나이</td>
+				<td id="age"></td>
+			</tr>
+			<tr>
+				<td>결혼</td>
+				<td id="marriage"></td>
+			</tr>
+		</table>
+		<input type="button" value="목록으로" onclick="preInit()">
+	</div>
+	<div id="insertBox">
+		<h2>학생등록</h2>
+		<form name="insertFrm" method="post">
+			<input name="service" value="insert" type="hidden">
+			<table border="">
+				<tr>
+					<td>아이디</td>
+					<td><input name="pid"></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input name="pname"></td>
+				</tr>
+				<tr>
+					<td>나이</td>
+					<td><input name="age"></td>
+				</tr>
+				<tr>
+					<td>결혼</td>
+					<td><input name="marriage"></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right">
+					<input type="button" value="등록" onclick="insertGo()">
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+		
+		<input type="button" value="목록으로" onclick="preInit()">
+	</div>
 </body>
 </html>
 
 <script type="text/javascript">
-let tbl = document.querySelector("#tbl")
+
+
+
+function boxDisplay(boxName){
+	// 박스 등록
+	let boxs = {
+		detail : document.querySelector("#detailBox"),
+		list: document.querySelector("#listBox"),
+		insert: document.querySelector("#insertBox"),
+	}
+	// 모든 박스 안보이게
+	for(let box of Object.values(boxs)){
+		box.style.display ="none"
+	}
+	// 매갭변수 박스만 보이게
+	boxs[boxName].style.display ="block"
+}
+
+function insertForm(){
+	boxDisplay("insert")
+}
+function insertGo(){
+	
+	//폼으로부터 보낼 데이터 요소 넣기
+	const frmData = new FormData(document.insertFrm)
+	
+	
+	let insertData = ""
+	
+	for (const[kk, vv] of frmData.entries()) {
+		insertData+=`${kk}=${vv}&`
+	}
+
+	console.log(insertData)
+	
+	fetch("/jspPrj/back_12/stud.jsp",{
+		method:"POST",
+		headers:{
+            'Content-type' : 'application/x-www-form-urlencoded', 
+        },
+        body: insertData
+	})
+	.then(rr=>rr.text())
+	.then(data=>{  
+		console.log(data)
+		
+		alert("등록되었습니다")
+		preInit()
+	})
+	.catch(e=>console.log("에러:",e.message))
+}
+
+
 function preInit(){
+	// 리스트만 보이게
+	boxDisplay("list")
+	
+	let tbl = document.querySelector("#tbl")
+	tbl.innerHTML="<tr><td>아이디</td>	<td>이름</td>	</tr>"//하위 모든 요소 삭제
+	
 	fetch("/jspPrj/back_12/stud.jsp",{
 		method:"POST",
 		headers:{
@@ -34,13 +141,11 @@ function preInit(){
 		// data : 백앤드에서 받은 메뉴 배열
 		//console.log(data)
 		for (let st of data) {
-			console.log(st)
+			//console.log(st)
 			let tr = document.createElement("tr")
 			tr.innerHTML = `
 				<td>${st.pid}</td>
 				<td onclick="detailGo('${st.pid}')">${st.pname}</td>
-				<td>${st.age}</td>
-				<td>${st.marriage ? "기혼":"미혼"}</td>
 			`
 			tbl.appendChild(tr)	
 		}
@@ -51,6 +156,7 @@ function preInit(){
 }
 
 function detailGo(pid){
+	boxDisplay("detail")
 	
 	fetch("/jspPrj/back_12/stud.jsp",{
 		method:"POST",
@@ -61,7 +167,11 @@ function detailGo(pid){
 	})
 	.then(rr=>rr.json())
 	.then(data=>{  
-		console.log(data)
+		//console.log(data)
+		document.querySelector("#detailBox #pid").innerHTML=data.pid
+		document.querySelector("#detailBox #pname").innerHTML=data.pname
+		document.querySelector("#detailBox #age").innerHTML=data.age
+		document.querySelector("#detailBox #marriage").innerHTML=data.marriage ? "기혼":"미혼"
 	})
 	.catch(e=>console.log("에러:",e.message))
 }

@@ -94,10 +94,33 @@ public class StudDAO {
 		}finally {
 			close();
 		}
-		
-		
+
 		return dto;
 	}
+	
+	
+	public int insert(StudDTO dto){
+		
+		int res = 0;
+		
+		try {
+			sql = "insert into member (pid, pname, age, marriage) values ("+
+					" '"+dto.getPid()+"','"+dto.getPname()+
+					"', "+dto.getAge()+", "+ ( dto.isMarriage() ? 1 : 0) +")";
+
+			//4. 쿼리 실행
+			res = stmt.executeUpdate(sql);
+			
+		} catch (Exception e) {
+			e.printStackTrace(); //에러 확인
+		}finally {
+			close();
+		}
+
+		return res;
+	}
+	
+	
 	
 	
 	public void close() {
